@@ -2,17 +2,14 @@ package app
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/rkashapov2015/webproject/internal/database"
 	"github.com/rkashapov2015/webproject/internal/routes"
-	"github.com/uptrace/bun"
 )
 
 type App struct {
 	http *fiber.App
-	db   *bun.DB
 }
 
 func NewApp(ctx context.Context) (*App, error) {
@@ -24,15 +21,14 @@ func NewApp(ctx context.Context) (*App, error) {
 
 func (a *App) initHttp() {
 	a.http = fiber.New()
+	database.ConnectDB()
 
 	routes.SetupRoutes(a.http)
 }
 
 func (a *App) Run() {
-	a.db = database.ConnectDB()
-	if a.db != nil {
-		fmt.Println("connected")
+	if database.DB == nil {
+		panic("DB not connected")
 	}
-
 	a.http.Listen(":8000")
 }

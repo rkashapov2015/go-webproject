@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"github.com/rkashapov2015/webproject/internal/database"
-	"github.com/rkashapov2015/webproject/internal/migrations"
+	"github.com/rkashapov2015/webproject/internal/database/migrations"
 	"github.com/uptrace/bun/extra/bundebug"
 	"github.com/uptrace/bun/migrate"
 	"github.com/urfave/cli/v2"

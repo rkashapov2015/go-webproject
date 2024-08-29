@@ -27,12 +27,12 @@ func ConnectDB() *bun.DB {
 
 	sqldb := sql.OpenDB(pgdriver.NewConnector(pgdriver.WithDSN(dsn)))
 
-	DB := bun.NewDB(sqldb, pgdialect.New())
-	registerModels(DB)
+	DB = bun.NewDB(sqldb, pgdialect.New())
+	registerModels()
 
 	return DB
 }
 
-func registerModels(db *bun.DB) {
-	db.RegisterModel((*models.UserToRole)(nil))
+func registerModels() {
+	DB.RegisterModel((*models.UserToRole)(nil))
 }
