@@ -1,0 +1,3 @@
+[build]
+cmd = "go build -o ./bin/service ./cmd && go build -o ./bin/console ./console"
+bin = "bin/service"

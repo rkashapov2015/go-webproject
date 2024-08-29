@@ -1,0 +1,6 @@
+.vscode
+.idea
+console/console
+.env.local
+tmp
+bin
