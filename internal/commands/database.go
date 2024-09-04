@@ -1,39 +1,14 @@
-package main
+package commands
 
 import (
 	"fmt"
-	"log"
-	"os"
 	"strings"
 
-	"github.com/rkashapov2015/webproject/internal/database"
-	"github.com/rkashapov2015/webproject/internal/database/migrations"
-	"github.com/uptrace/bun/extra/bundebug"
 	"github.com/uptrace/bun/migrate"
 	"github.com/urfave/cli/v2"
 )
 
-func main() {
-	db := database.ConnectDB()
-	db.AddQueryHook(bundebug.NewQueryHook(
-		bundebug.WithEnabled(false),
-		bundebug.FromEnv(),
-	))
-
-	app := &cli.App{
-		Name: "bun",
-
-		Commands: []*cli.Command{
-			newDBCommand(migrate.NewMigrator(database.DB, migrations.Migrations)),
-			newUserCommand(db),
-		},
-	}
-	if err := app.Run(os.Args); err != nil {
-		log.Fatal(err)
-	}
-}
-
-func newDBCommand(migrator *migrate.Migrator) *cli.Command {
+func NewDBCommand(migrator *migrate.Migrator) *cli.Command {
 	return &cli.Command{
 		Name:  "db",
 		Usage: "database migrations",

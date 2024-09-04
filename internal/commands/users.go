@@ -1,4 +1,4 @@
-package main
+package commands
 
 import (
 	"database/sql"
@@ -9,13 +9,13 @@ import (
 	"time"
 
 	"github.com/rkashapov2015/webproject/internal/database/models"
-	"github.com/rkashapov2015/webproject/internal/security"
+	"github.com/rkashapov2015/webproject/internal/tools/security"
 	"github.com/uptrace/bun"
 	"github.com/urfave/cli/v2"
 	"golang.org/x/term"
 )
 
-func newUserCommand(db *bun.DB) *cli.Command {
+func NewUserCommand(db *bun.DB) *cli.Command {
 	return &cli.Command{
 		Name:  "users",
 		Usage: "manage users",
